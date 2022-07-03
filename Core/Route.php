@@ -14,8 +14,8 @@ class Route
     public function __construct()
     {
         $this->register('GET', '/', 'Pages@index');
-        $this->register('GET', 'events', 'Pages@events');
-        $this->register('GET', 'musicians', 'Pages@musicians');
+        $this->register('GET', 'Events', 'Pages@events');
+        $this->register('GET', 'Venues', 'Pages@venues');
         $this->register('GET', '400', 'Pages@invalidRequest');
         $this->register('GET', '404', 'Pages@notFound');
         $this->register('GET', '500', 'Pages@serverError');

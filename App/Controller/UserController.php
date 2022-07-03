@@ -30,13 +30,6 @@ class UserController extends AbstractController
 
     public function listAction()
     {
-        if ($this->auth->getCurrentUser() === null || !$this->auth->getCurrentUser()->isAdmin() || !$this->auth->isLoggedIn())
-        {
-            $this->redirect('');
-        }
-
-        $this->view->render("User/index", [
-            'users' => User::getAll()
-        ]);
+        // TO DO //
     }
 }

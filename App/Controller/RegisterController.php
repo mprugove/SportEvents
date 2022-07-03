@@ -30,8 +30,8 @@ class RegisterController extends AbstractController
 
         if ($validator->validate($post))
         {
-            // Formatting
-            // Example: jOHN to John
+            // Format
+            // jOHN to John
             //          EMAil@emAIL.COm to email@email.com
             $username = ucfirst(strtolower($post['username']));
             $email = strtolower($post['email']);

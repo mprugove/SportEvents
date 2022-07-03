@@ -15,6 +15,16 @@ class PagesController extends AbstractController
         ]);
     }
 
+    public function eventsAction():void
+    {
+        $this->view->render('Events/Events');
+    }
+
+    public function venuesAction():void
+    {
+        $this->view->render('Venues/Venues');
+    }
+
     public function notFoundAction(): void
     {
         $this->view->render('Pages/404');
