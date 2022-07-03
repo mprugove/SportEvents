@@ -1,0 +1,96 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><i class="bi bi-file-image-fill"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="<?= URL_ROOT; ?>">Home</a>
+        </li>
+        <?php if (!\Core\Auth::getInstance()->isLoggedIn()): ?>
+          <!--login modal -->
+            <li class="nav-item">
+            <a
+                href="#login"
+                data-bs-toggle="modal"
+                data-bs-target="#login"
+                class="rounded nav-link"
+                >Login</a>
+            </li>
+            <li class="nav-item">
+              <!--register modal -->
+              <a
+                href="#register"
+                data-bs-toggle="modal"
+                data-bs-target="#register"
+                class="rounded nav-link"
+                >Register</a>
+            </li>
+            <?php endif; ?>
+            <?php 
+            if(\Core\Auth::getInstance()->isLoggedIn()):
+              if (\Core\Auth::getInstance()->getCurrentUser()->getisAdmin()): ?>
+              <li class="nav-item">
+                  <a class="nav-link" href="/SportEvents/event">Events</a>
+              </li>
+              <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Actions ADMIN
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <a class="dropdown-item" href="<?= URL_ROOT; ?>login/logoutSubmit">Logout </a>
+              
+            </ul>
+            <?php else: ?>
+          </li>
+          
+            
+                <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Actions USER
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a class=" dropdown-item" href="/SportEvents/event">Events</a>
+              <li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class=" dropdown-item" href="<?= URL_ROOT; ?>login/logoutSubmit">Logout </a>
+              </li>
+            </ul>
+          </li>
+        
+          <?php endif; ?>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+        
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="caret"><?= \Core\Auth::getInstance()->getCurrentUser()->getUsername(); ?></span>
+            </a>
+
+              <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                
+                  <a class="dropdown-item" href="/SportEvents/events/create">Add Event</a>
+            
+                  <a class=" dropdown-item" href="/SportEvents/user">My Account</a>
+                  <hr class="dropdown-divier">
+                  <a class="dropdown-item" href="<?= URL_ROOT; ?>login/logoutSubmit">Logout</a>
+              </div>
+          </li>
+        <?php endif;?>
+      </ul>
+      <form class="d-flex" role="search" action="/SportEvents/" method="post">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>

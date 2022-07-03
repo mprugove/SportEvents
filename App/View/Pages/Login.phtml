@@ -1,0 +1,37 @@
+
+<!-- Modal -->
+<div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginLabel">Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+            <form action="login/submit" method="POST">
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email" class="required">Email</label>
+                    <input type="email" id="email" class="form-control" name="email" placeholder="Email" required="required"
+                           value="<?= isset($_SESSION['form_data']['email']) ? $_SESSION['form_data']['email'] : ''; ?>">
+                    <small class="text-danger"><?= isset($_SESSION['form_errors']['login']) ? $_SESSION['form_errors']['login'] : ''; ?></small>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password" class="required">Password</label>
+                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required="required">
+                </div>
+                <input class="btn btn-primary btn-block" type="submit" value="Login">
+            </form>
+            <p class="mt-5 text-center">Don't have account?  <a href="#register" data-bs-toggle="modal"><button class="btn btn-outline-primary">Register</button></a></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+

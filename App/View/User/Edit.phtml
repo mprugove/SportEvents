@@ -1,0 +1,33 @@
+<?php include_once INCLUDE_PATH .'header.phtml'; ?>
+
+<div class="row">
+    <div class="container">
+        <h1>Change Password</h1>
+
+        <?php if (isset($message)): ?>
+            <div>
+                <p class="alert-danger pt-2 pb-2 pl-2">
+                    <?php echo $message; ?>
+                </p>
+            </div>
+        <?php endif ?>
+
+        <form action="/SportEvents/user/update" method="post">
+            <label for="oldPassword">Enter Old Password:</label>
+            <input type="password" name="oldPassword" id="oldPassword" class="form-control" >
+
+            <label for="password">Enter New Password:</label>
+            <input type="password" name="password" id="password" class="form-control" >
+
+            <label for="confirmPassword">Confirm New Password:</label>
+            <input type="password" name="confirmPassword"
+                   id="confirmPassword" class="form-control" >
+
+            <input type="hidden" name="id" value="user id">
+            <button class="btn btn-primary mt-2">Submit</button>
+        </form>
+
+    </div>
+</div>
+
+<?php include_once INCLUDE_PATH .'footer.phtml'; ?>

@@ -1,0 +1,64 @@
+<!-- Modal -->
+<div class="modal fade" id="register" tabindex="-1" aria-labelledby="registerLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registerLabel">Register</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+            <h5 class="modal-title font-weight-bold">Register</h5>
+
+            <form action="<?= URL_ROOT; ?>register/submit" method="POST">
+
+                <div class="form-row row-eq-spacing-sm">
+                    <!-- First name -->
+                    <div class="col-sm form-group <?= isset($_SESSION['form_errors']['name']) ? 'is-invalid' : ''; ?>">
+                        <label for="first-name" class="required font-weight-bold">First name</label>
+                        <input type="text" class="form-control"
+                               value="<?= isset($_SESSION['form_data']['username']) ? $_SESSION['form_data']['username'] : ''; ?>"
+                               name="username" id="first-name" placeholder="First name" required="required">
+                        <small class="text-danger"><?= isset($_SESSION['form_errors']['username']) ? $_SESSION['errors']['username'] : ''; ?></small>
+                    </div>
+
+                  
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email" class="required font-weight-bold">Email</label>
+                    <input type="email" id="email" class="form-control" name="email" placeholder="Email" required="required"
+                           value="<?= isset($_SESSION['form_data']['email']) ? $_SESSION['form_data']['email'] : ''; ?>">
+                    <small class="text-danger"><?= isset($_SESSION['form_errors']['email']) ? $_SESSION['form_errors']['email'] : ''; ?></small>
+                </div>
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password" class="required font-weight-bold">Password</label>
+                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required="required">
+                    <small class="text-danger"><?= isset($_SESSION['form_errors']['password']) ? $_SESSION['form_errors']['password'] : ''; ?></small>
+                </div>
+                <!-- Confirm password -->
+                <div class="form-group">
+                    <label for="confirm-password" class="required font-weight-bold">Confirm Password</label>
+                    <input type="password" id="confirm-password" class="form-control" name="confirm-password" placeholder="Confirm password" required="required">
+                    <small class="text-danger"><?= isset($_SESSION['form_errors']['confirm-password']) ? $_SESSION['form_errors']['confirm-password'] : ''; ?></small>
+                    <div class="form-text">
+                        Must match the above password exactly.
+                    </div>
+                </div>
+                <input class="btn btn-primary btn-block" type="submit" value="Register">
+
+            </form>
+
+           
+
+            <p class="mt-5 text-center"> Already have an account? Sign in<a href="<?= URL_ROOT; ?>#login" class="hyperlink"></a>  <a href="#login" data-bs-toggle="modal"><button class="btn btn-outline-primary">Login</button></a></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>

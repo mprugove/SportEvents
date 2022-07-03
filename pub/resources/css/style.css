@@ -1,0 +1,243 @@
+/** CUSTOM CSS **/
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap");
+:root {
+  --body-font: "Montserrat", sans-serif;
+  --body-background: rgba(18, 57, 95, 0.685);
+  --nav-background: linear-gradient(
+    to right top,
+    rgb(14, 179, 255),
+    rgb(1, 0, 78)
+  );
+  --first-color: rgb(35, 61, 110);
+  --first-color-alt: rgb(48, 107, 217);
+  --title-color: rgb(241, 242, 243);
+  --text-color: rgb(131, 137, 149);
+  --hover-color: rgba(85, 85, 85, 0.4);
+  --hover-scrolled-color: rgba(85, 85, 85, 0.4);
+  --white-color: rgb(255, 255, 255);
+  --body-color: rgb(10, 10, 11);
+  --container-color: rgb(242, 242, 243);
+  --card-color: rgba(255, 255, 255, 0.9);
+
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font: 0.938rem;
+  --small-font: 0.813rem;
+  --smaller-font: 75rem;
+  --font-medium: 500;
+  --font-bold: 600;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  font-family: var(--body-font);
+  color: var(--white-color);
+  font-weight: var(--font-medium);
+  box-sizing: border-box;
+  background: var(--body-background);
+}
+
+a {
+  text-decoration: none !important;
+}
+
+#parallax {
+  background-image: url("../img/parallax.jpg");
+  height: 100vh;
+  width: auto;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#error_404 {
+  background-image: url("../img/404.png");
+  height: 100vh;
+  width: auto;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
+  max-width: 100rem;
+  margin-inline: auto;
+  padding-inline: 2rem;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3.1rem 23.5%;
+  margin-bottom: 10rem;
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+}
+
+.navbar-bottom {
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  color: var(--white-color);
+  font-weight: var(--font-bold);
+  background-color: rgb(51, 51, 51);
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.navbar.navbar-scrolled {
+  /*  not working hm?
+  background: var(--nav-background);
+  transition: background 550ms ease-out; */
+  background-color: rgb(11, 180, 247);
+  transition: background-color 550ms ease-in;
+  opacity: 0.9;
+}
+
+.navbar.navbar-scrolled li a {
+  color: var(--white-color);
+  transition: color 200ms;
+}
+
+.logo {
+  font-size: 1.5rem;
+  margin: 0.5rem;
+  font-weight: var(--font-bold);
+}
+
+.navbar_link ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navbar_link li {
+  list-style: none;
+  font-weight: var(--font-medium);
+}
+
+.navbar_link li a {
+  text-decoration: none;
+  color: var(--first-color);
+  padding: 1rem;
+  display: block;
+}
+
+.navbar_link li a:hover {
+  background-color: var(--hover-color);
+  color: white;
+  transition: ease-in 0.25s;
+  transform: scale(1.15);
+}
+
+.toggle_button {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  display: none !important;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 30px;
+  font-size: 1.75rem;
+}
+
+@media (max-width: 1024px) {
+  .navbar-bottom {
+    display: none;
+  }
+
+  .toggle_button {
+    display: flex !important;
+  }
+
+  .navbar_link {
+    display: none;
+    width: 100%;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: auto !important;
+    margin-bottom: 2rem;
+    padding: 0;
+  }
+
+  .navbar.navbar-scrolled .toggle_button {
+    color: white;
+  }
+
+  .navbar_link ul {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .navbar_link li {
+    text-align: center;
+  }
+
+  .navbar_link li a {
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar_link.active {
+    display: flex;
+  }
+}
+
+.travel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background-color: var(--card-color) !important;
+  aspect-ratio: 1 / 1.15;
+  position: absolute;
+}
+
+.card__content {
+  background: var(--white-color);
+  align-self: end;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  box-shadow: 0 0.25rem 1rem rgb(0, 0, 0);
+}
+
+.card__title {
+  font-size: var(--h1-font-size);
+  line-height: 2;
+}
+
+.card__img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.card__link {
+  text-transform: uppercase;
+  color: var(--first-color);
+}
+
+.card__link:hover {
+  color: var(--first-color-alt);
+  transition: ease-in 0.25s;
+}
