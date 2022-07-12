@@ -13,12 +13,12 @@
             <form action="<?= URL_ROOT; ?>register/submit" method="POST">
 
                 <div class="form-row row-eq-spacing-sm">
-                    <!-- First name -->
+                    <!-- Username -->
                     <div class="col-sm form-group <?= isset($_SESSION['form_errors']['name']) ? 'is-invalid' : ''; ?>">
-                        <label for="first-name" class="required font-weight-bold">First name</label>
+                        <label for="username" class="required font-weight-bold">Username</label>
                         <input type="text" class="form-control"
                                value="<?= isset($_SESSION['form_data']['username']) ? $_SESSION['form_data']['username'] : ''; ?>"
-                               name="username" id="first-name" placeholder="First name" required="required">
+                               name="username" id="username" placeholder="Username" required="required">
                         <small class="text-danger"><?= isset($_SESSION['form_errors']['username']) ? $_SESSION['errors']['username'] : ''; ?></small>
                     </div>
 

@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Controller;
 
+use App\Model\Event;
 use App\Model\User;
 
 class PagesController extends AbstractController
@@ -13,11 +14,6 @@ class PagesController extends AbstractController
         $this->view->render('Pages/Index', [
             'users' => User::getAll()
         ]);
-    }
-
-    public function eventsAction():void
-    {
-        $this->view->render('Events/Events');
     }
 
     public function venuesAction():void

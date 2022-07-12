@@ -2,8 +2,11 @@
 <!-- Register Modal -->
 
 
-events
 
+
+<?php foreach ($data['events'] as $event):
+echo $event->event;
+ endforeach;?>
 
 
 <?php include INCLUDE_PATH .'/footer.phtml'; ?>
