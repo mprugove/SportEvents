@@ -42,7 +42,7 @@ class SportsController extends AbstractController
                 'sport' => $sport
             ]);
     
-            $this->redirect('Sports/Sports');
+            $this->redirect('');
         }
        else {
         $this->session->setFormData($validator->getData());
@@ -51,4 +51,9 @@ class SportsController extends AbstractController
        }
     }
     
+    public function deleteSubmitAction($id)
+    {
+        Sport::delete('id', $id);
+        $this->redirect('');
+    }
 }

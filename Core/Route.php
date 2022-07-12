@@ -20,7 +20,8 @@ class Route
 
         $this->register('GET', 'Sports', 'Sports@Sports');
         $this->register('POST', 'Sports', 'Sports@addSubmit');
-        $this->register('POST', 'sports/submit', 'Sports@addSubmit');
+        $this->register('POST', 'Sports/submit', 'Sports@addSubmit');
+        $this->register('POST', 'Sports/deleteSubmit/{id}', 'Sports@deleteSubmit');
         
         $this->register('GET', 'Events', 'Events@events');
         $this->register('GET', 'Venues', 'Pages@venues');
