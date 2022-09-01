@@ -16,16 +16,33 @@ class SportsController extends AbstractController
         parent::__construct();
     }
    
-    public function sportsAction():void
+    public function sportsAction($id):void
     {
+        if ($this->auth->getCurrentUser() === null || !$this->auth->isLoggedIn())
+        {
+            $this->redirect('');
+        }
+
+        if($id)
+        {
         $this->view->render('Sports/Sports', [
-            'sports' => Sport::getAll()
+            'sports' => Sport::getAll('sport')
         ]);
+    }
+        else 
+    
+        {
+            
+            $this->view->render('Sports/Sports', [
+                'sports'  => Sport::getAll('sport'),
+
+            ]);
+        }
     }
 
     public function addAction()
     {
-        $this->redirect(('Sports/Sports'));
+        $this->redirect('admin/sports');
     }
 
     public function addSubmitAction()
@@ -42,18 +59,23 @@ class SportsController extends AbstractController
                 'sport' => $sport
             ]);
     
-            $this->redirect('');
+            $this->redirect('admin/sports');
         }
        else {
         $this->session->setFormData($validator->getData());
         $this->session->setFormErrors($validator->getErrors());
-        $this->redirect('Sports/Sports');
+        $this->redirect('admin/sports');
        }
     }
     
     public function deleteSubmitAction($id)
     {
+        if ($this->auth->getCurrentUser() === null || !$this->auth->isLoggedIn())
+            {
+                $this->redirect('');
+            }
+            
         Sport::delete('id', $id);
-        $this->redirect('');
+        $this->redirect('admin/sports');
     }
 }

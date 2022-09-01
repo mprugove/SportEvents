@@ -1,29 +1,25 @@
 <?php include_once INCLUDE_PATH .'header.phtml'; ?>
+
 <div class="row mt-5">
     <div class="col-md">
-        <div class="row mt-5">
+        <div class="row ">
             <div class="col-md">
        
-                <hr>
-                <table class="table table-hover">
-                    <thead class="table-primary">
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Join date</th>
-                        <th>Action</th>
-                    </thead>
-            <?php foreach($data['users'] as $user):?>
-                
-                        <tbody>
-                        <tr>
-                            <td><?= $user->username ?></td>
-                            <td><?= $user->email ?></td>
-                            <td><?= $user->joined ?></td>
-                            <td><a class="btn btn-primary" href="user/edit">Action</a></td>
-                        </tr>
-                    </tbody>
+            <div class="card-group ">
+                <?php foreach($data['users'] as $user): ?>
+            <div class="card ">
+                <img src="..." class="card-img-top" alt="avatar">
+                <div class="card-body">
+                    <h5 class="card-title"><?= $user->getUsername(); ?></h5>
+                    <p class="card-text"><?= $user->getEmail(); ?></p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted"><?= $user->getJoined(); ?></small>
+                </div>
+            </div>
                     <?php endforeach;?>
-                </table>
+            </div>
+                <a class="btn btn-primary my-3" href="/SportEvents/user/edit/<?= $user->id; ?>">Edit</a>
             
             </div>
         </div>

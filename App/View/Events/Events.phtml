@@ -1,12 +1,28 @@
 <?php include INCLUDE_PATH .'/header.phtml'; ?>
-<!-- Register Modal -->
+
+<?php foreach ($data['events'] as $event): ?>
 
 
 
 
-<?php foreach ($data['events'] as $event):
-echo $event->event;
- endforeach;?>
+<div class="card-group pt-5">
+    <div class="card ">
+      <img src="..." class="card-img-top" alt="img">
+      <div class="card-body">
+        <h5 class="card-title"><?= $event->getEvent(); ?></h5>
+        <p class="card-text"><?= $event->getDescription(); ?></p>
+      </div>
+    <div class="card-footer">
+        <small class="text-muted">  
+          <?php foreach ($data['sports'] as $sport): ?>
+            <?=$sport->getSport();?>
+            <?php endforeach; ?>
+          <?= $event->getStartDate() . ' ' . $event->getStartTime(); ?></small>
+    </div>
+  </div>
+</div>
+
+ <?php endforeach;?>
 
 
 <?php include INCLUDE_PATH .'/footer.phtml'; ?>

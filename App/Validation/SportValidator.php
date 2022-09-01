@@ -17,13 +17,20 @@ class SportValidator extends AbstractValidator
 
     public function validateSport($sport)
     {
-        if(strlen($sport) < 2)
+        if(strlen($sport) < 3)
         {
             $this->errors['sport'] = "Too short";
         }
+        
+        if(strlen($sport) > 25)
+        {
+            $this->errors['sport'] = "Too long";
+        }
 
+     
         if (empty($this->errors['sport']))
         {
+           
             $this->data['sport'] = $sport;
         }
     }

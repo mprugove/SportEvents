@@ -1,0 +1,75 @@
+<?php include INCLUDE_PATH .'/header.phtml'; ?>
+<div class="row mt-5">
+    
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead class="table-primary">
+                <th>#</th>
+                <th>Sport</th>
+                <th>Action</th>
+            </thead>
+        <?php foreach ($data['sports'] as $key => $sport): ?>
+            <tbody>
+                <tr>
+                    <td><?= ++$key; ?></td>
+                    <td><?= $sport->sport; ?></td>
+                    <td>
+                        <form action="<?= URL_ROOT;?>Sports/deleteSubmit/<?=$sport->getId(); ?>" method="POST">
+                            <button class="btn btn-outline-danger" name="deleteSubmit">
+                        <span>
+                            <i class="bi bi-x-square-fill " aria-hidden="true"></i>
+                        </span>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        <?php endforeach;?>
+        </table>
+        <hr>
+    </div>
+    <!--- add sport modal -->
+    <div class="col-md-3">  
+        <button type="buton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSportModal">
+            Add new sport
+        </button>
+    </div>
+    
+    <div class="modal fade" id="addSportModal" tabindex="-1" aria-labelledby="addSportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add sport</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <div class="col-md-6">
+            <form action="<?= URL_ROOT; ?>Sports/submit" method="POST">
+                    <div class="form-group">
+                        <label for="sport" class="required font-weight-bold"></label>
+                        <input type="sport" id="sport" class="form-control " name="sport" placeholder="Sport" required="required"
+                            value="<?= isset($_SESSION['form_data']['sport']) ? $_SESSION['form_data']['sport'] : ''; ?>">
+                        <small class="text-danger"><?= isset($_SESSION['form_errors']['sport']) ? $_SESSION['form_errors']['sport'] : ''; ?></small>
+                    </div>
+            </div>
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-primary" type="submit" value="Add">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+
+
+<?php foreach($data['sports'] as $user): ?>
+            <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+<datalist id="datalistOptions">
+    
+  <option value="<?= $user->sport; ?>">
+ <?php endforeach;?>
+</datalist>
+<?php include INCLUDE_PATH .'/footer.phtml'; ?>

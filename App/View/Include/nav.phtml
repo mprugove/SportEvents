@@ -43,32 +43,21 @@
               Actions ADMIN
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="/SportEvents/admin/events">Events</a></li>
+              <li><a class="dropdown-item" href="/SportEvents/admin/sports">Sports</a></li>
+              <li><a class="dropdown-item" href="/SportEvents/admin/venues">Venues</a></li>
+              <li><a class="dropdown-item" href="/SportEvents/admin/list">User list</a></li>
               <li><hr class="dropdown-divider"></li>
               <a class="dropdown-item" href="<?= URL_ROOT; ?>login/logoutSubmit">Logout </a>
               
             </ul>
             <?php else: ?>
           </li>
+          <li class="nav-item">
+                  <a class="nav-link" href="/SportEvents/Events">Events</a>
+              </li>
+                
           
-            
-                <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Actions USER
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li>
-                <a class=" dropdown-item" href="/SportEvents/Events">Events</a>
-              <li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class=" dropdown-item" href="<?= URL_ROOT; ?>login/logoutSubmit">Logout </a>
-              </li>
-            </ul>
-          </li>
-        
           <?php endif; ?>
         </ul>
 

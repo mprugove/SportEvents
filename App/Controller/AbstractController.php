@@ -23,7 +23,8 @@ class AbstractController
 
     protected function redirect(string $location)
     {
-        $location = strtolower($location);
+        #$location = strtolower($location);
+        $location = $location;
 
         header('Location: ' . URL_ROOT . $location);
     }

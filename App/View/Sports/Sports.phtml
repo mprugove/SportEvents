@@ -1,40 +1,31 @@
 <?php include INCLUDE_PATH .'/header.phtml'; ?>
 <div class="row mt-5">
-    <div class="col-md-12">
-        <table class="table table-hover">
+    <div class="col-md-4">
+        <?php foreach($data['sports'] as $user): ?>
+            <input class="form-control my-3" list="datalistOptions" id="exampleDataList" placeholder="Type to search">
+            <datalist id="datalistOptions">
+            <option value="<?= $user->sport; ?>">
+        <?php endforeach;?>
+            </datalist>
+    </div>
+    <div class="col-md-9">
+        <table class="table table-hover table-sm">
             <thead class="table-primary">
+                <th>#</th>
                 <th>Sport</th>
-                <th>Action</th>
             </thead>
-        <?php foreach ($data['sports'] as $sport): ?>
+        <?php foreach ($data['sports'] as $key => $sport): ?>
             <tbody>
                 <tr>
-                    <td><?= $sport->sport; ?></td>
-                    <td><form action="<?= URL_ROOT;?>Sports/deleteSubmit/<?=$sport->getId(); ?>" method="post">
-                            <button class="btn btn-outline-danger" name="deleteSubmit">
-                        <span>
-                            <i class="bi bi-x-square-fill " aria-hidden="true"></i>
-                        </span>
-                            </button>
-                        </form>
-                    </td>
+                    <td><?= ++$key; ?></td>
+                    <td><?= $sport->getSport(); ?></td>
                 </tr>
             </tbody>
         <?php endforeach;?>
         </table>
-        <hr>
-    </div>
-    <div class="col-md-3">
-    <form action="<?= URL_ROOT; ?>Sports/submit" method="POST">
-            <div class="form-group">
-                <label for="sport" class="required font-weight-bold">Add Sport</label>
-                <input type="sport" id="sport" class="form-control " name="sport" placeholder="Sport" required="required"
-                    value="<?= isset($_SESSION['form_data']['sport']) ? $_SESSION['form_data']['sport'] : ''; ?>">
-                <small class="text-danger"><?= isset($_SESSION['form_errors']['sport']) ? $_SESSION['form_errors']['sport'] : ''; ?></small>
-            </div>
-            <input class="btn btn-primary btn-block mt-3" type="submit" value="Add">
-        </form>
     </div>
 </div>
+       
+
 
 <?php include INCLUDE_PATH .'/footer.phtml'; ?>

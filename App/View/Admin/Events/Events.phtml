@@ -1,0 +1,96 @@
+<?php include INCLUDE_PATH .'/header.phtml'; ?>
+
+<?php foreach ($data['events'] as $event): ?>
+
+    <hr> 
+                <table class="table table-hover">
+                    <thead class="table-primary">
+                        <th>Event</th>
+                        <th>Description</th>
+                        <th>Start Date</th>
+                        <th>Start Time</th>
+                        <th>Actions</th>
+                    </thead>
+           
+                    <tbody>
+                        <tr>
+                            <td><?= $event->getEvent(); ?></td>
+                            <td><?= $event->getDescription(); ?></td>
+                            <td><?= $event->getStartDate(); ?></td>
+                            <td><?= $event->getStartTime(); ?></td>
+                            <td>
+                                <a class="btn btn-primary" href="/SportEvents/admin/events/edit/<?= $event->id; ?>">Edit</a>
+                                <form action="<?= URL_ROOT;?>Events/deleteSubmit/<?= $event->getId(); ?>" method="post">
+                                    <button class="btn btn-danger" name="deleteSubmit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+ <?php endforeach;?>
+    <div class="col-md-3">  
+        <button type="buton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEventModal">
+            Add new event
+        </button>
+    </div>
+    
+    <div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Event</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            
+                <div class="modal-body">
+                    <div class="col-md-12">
+                    <form action="<?= URL_ROOT; ?>Events/submit" method="POST">
+                        <div class="form-group">
+                            <!--event, description -->
+                            <label for="event" class="required font-weight-bold"></label>
+                            <input type="event" id="event" class="form-control my-1 " name="event" placeholder="Event" required="required"
+                                value="<?= isset($_SESSION['form_data']['sport']) ? $_SESSION['form_data']['sport'] : ''; ?>">
+                            <small class="text-danger"><?= isset($_SESSION['form_errors']['sport']) ? $_SESSION['form_errors']['sport'] : ''; ?></small>
+
+                            <textarea class="form-control my-1 form-floating" id="description" name="description" placeholder="Description"></textarea>
+                            <!-- date, time -->
+                            <div class="row">
+                                <div class="col-md-6"> Event start date
+                                    <input type="date" class="form-control" name="start-date" id="start-date">
+                                </div>
+                               <div class="col-md-6">Event end date
+                                  <input type="date" class="form-control" name="end-date" id="end-date">
+                                </div>       
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6"> Event starting
+                                    <input type="time" class="form-control" name="start-time" id="start-time" value="22:00">
+                                </div>
+                                <div class="col-md-6"> Event ending
+                                    <input type="time" class="form-control" name="end-time" id="end-time" value="23:00">
+                                </div>
+                            </div>
+                         <!-- sport, venue -->
+                         <select name="sport" id="sport" class="form-control">
+                            <?php foreach($data['sports'] as $sport): ?>
+                                <option value="<?= $sport->getId(); ?>"><?= $sport->getSport();?></option>
+                                <?php endforeach; ?>
+                         </select> 
+                         <select name="venues" id="venues" class="form-control">
+                            <?php foreach($data['venues'] as $venue): ?>
+                                <option value="<?= $venue->getId(); ?>"><?= $venue->getVenue();?></option>
+                                <?php endforeach; ?>
+                         </select>     
+                        </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-primary" type="submit" value="Add">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </form>
+            </div>
+        </div>
+     </div>
+
+     
+<?php include INCLUDE_PATH .'/footer.phtml'; ?>

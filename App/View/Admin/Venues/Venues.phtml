@@ -3,6 +3,9 @@
 
 
 
-venues
+<?php foreach($data['venues'] as $venue): ?>
+
+<?= $venue->getVenue(); ?>
+    <?php endforeach; ?>
 
 <?php include INCLUDE_PATH .'/footer.phtml'; ?>
