@@ -65,11 +65,11 @@
 <hr>
 
 
-<?php foreach($data['sports'] as $user): ?>
+<?php foreach($data['sports'] as $sport): ?>
             <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
 <datalist id="datalistOptions">
     
-  <option value="<?= $user->sport; ?>">
+  <option value="<?= $sport->sport; ?>">
  <?php endforeach;?>
 </datalist>
 <?php include INCLUDE_PATH .'/footer.phtml'; ?>
