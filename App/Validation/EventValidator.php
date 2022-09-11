@@ -17,6 +17,23 @@ class EventValidator extends AbstractValidator
 
     public function validateEvent($event)
     {
+
+        if(strlen($event) < 3)
+        {
+            $this->errors['event'] = "Too short";
+        }
+
+        if(empty($event))
+        {
+            $this->errors['event'] = "Cannot be empty";
+        }
+
+        if(empty($event))
+        {
+            $this->errors['start_time'] = 'Set up starting time';
+        }
+
+
         if (empty($this->errors['event']))
         {
             $this->data['event'] = $event;

@@ -31,14 +31,21 @@ class AdminController extends AbstractController
     }
 
     public function eventsAction($id)
-    {
-
+    {    
+        if (!$id) //??
+        {   
+            $event = Event::getAll();
+            $sports = Sport::getAll();
             $this->view->render('Admin/events/events', [
-                'events'  => Event::getAll(),
-                'sports' => Sport::getAll('sport'),
-                'venues' => Venue::getAll('venue')
-                
+                'events'  => $event,
+                'sports' => $sports,
+                'venues' => Venue::getAll('venue')   
             ]);
+        } else
+        
+        {
+            $this->redirect('');
+        }
         
     }
 

@@ -1,28 +1,35 @@
 <?php include INCLUDE_PATH .'/header.phtml'; ?>
 
 <?php foreach ($data['events'] as $event): ?>
+  
 
+<div class="row">
+  <div class="card-group pt-5">
+      <div class="card {display:inline-block;}">
+       
+        <img src="<?= RESOURCE_IMG_PATH . $event->getImage();?>" class="card-img-top w-25" alt="<?= $event->getImage();?>">
 
-
-
-<div class="card-group pt-5">
-    <div class="card ">
-      <img src="..." class="card-img-top" alt="img">
-      <div class="card-body">
-        <h5 class="card-title"><?= $event->getEvent(); ?></h5>
-        <p class="card-text"><?= $event->getDescription(); ?></p>
+        <div class="card-body">
+          <h5 class="card-title"><?= $event->getEvent(); ?></h5>
+          <?php foreach ($event->getEventVenue($event->getId()) as $venue): ?> 
+            <?=$venue->getVenue(); ?>
+          
+           
+          <?php endforeach;?>   
+          <p class="card-text"><?= $event->getDescription(); ?></p>
+        </div>
+        <div class="card-footer">
+        <small class="text-muted">
+        <?php foreach ($event->getEventSport($event->getId()) as $sport): ?>
+          <?=$sport->getSport();?>
+          <?php endforeach; ?>
+          <?= ' Starting at '. $event->getStartDate() . ', ' . $event->getStartTime(); ?></small>
+        </div>
       </div>
-    <div class="card-footer">
-        <small class="text-muted">  
-          <?php foreach ($data['sports'] as $sport): ?>
-            <?=$sport->getSport();?>
-            <?php endforeach; ?>
-          <?= $event->getStartDate() . ' ' . $event->getStartTime(); ?></small>
-    </div>
   </div>
 </div>
+    <?php endforeach;?>
 
- <?php endforeach;?>
 
 
 <?php include INCLUDE_PATH .'/footer.phtml'; ?>

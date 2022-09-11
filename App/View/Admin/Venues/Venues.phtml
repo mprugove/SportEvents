@@ -1,11 +1,19 @@
 <?php include INCLUDE_PATH .'/header.phtml'; ?>
 
+  <?php foreach($data['venues'] as $venue): ?>
 
-
-
-<?php foreach($data['venues'] as $venue): ?>
-
-<?= $venue->getVenue(); ?>
-    <?php endforeach; ?>
-
+   
+    <div class="card w-50" >
+  <img src="<?= RESOURCE_IMG_PATH . $venue->getImage(); ?>" class="card-img-top w-50" alt="">
+  <div class="card-body">
+    <h5 class="card-title"><?= $venue->getVenue(); ?></h5>
+    <p class="card-text"><?= $venue->getCity() .', '.$venue->getCountry();?></p>
+    <p class="card-text">Capacity <?= $venue->getCapacity();?></p>
+  </div>
+  <div class="card-body">
+    <button class="card-link btn btn-primary">Edit</button>
+    <button href="#" class="card-link btn btn-danger">Delete</button>
+  </div>
+</div>
+<?php endforeach; ?>
 <?php include INCLUDE_PATH .'/footer.phtml'; ?>

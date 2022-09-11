@@ -43,21 +43,21 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <div class="col-md-6">
-            <form action="<?= URL_ROOT; ?>Sports/submit" method="POST">
-                    <div class="form-group">
-                        <label for="sport" class="required font-weight-bold"></label>
-                        <input type="sport" id="sport" class="form-control " name="sport" placeholder="Sport" required="required"
-                            value="<?= isset($_SESSION['form_data']['sport']) ? $_SESSION['form_data']['sport'] : ''; ?>">
-                        <small class="text-danger"><?= isset($_SESSION['form_errors']['sport']) ? $_SESSION['form_errors']['sport'] : ''; ?></small>
-                    </div>
+                <div class="col-md-6">
+                    <form action="<?= URL_ROOT; ?>Sports/submit" method="POST">
+                            <div class="form-group">
+                                <label for="sport" class="required font-weight-bold"></label>
+                                <input type="sport" id="sport" class="form-control " name="sport" placeholder="Sport" required="required"
+                                    value="<?= isset($_SESSION['form_data']['sport']) ? $_SESSION['form_data']['sport'] : ''; ?>">
+                                <small class="text-danger"><?= isset($_SESSION['form_errors']['sport']) ? $_SESSION['form_errors']['sport'] : ''; ?></small>
+                            </div>
+                </div>
             </div>
-            </div>
-            <div class="modal-footer">
-                <input class="btn btn-primary" type="submit" value="Add">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </form>
-            </div>
+                <div class="modal-footer">
+                    <input class="btn btn-primary" type="submit" value="Add">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

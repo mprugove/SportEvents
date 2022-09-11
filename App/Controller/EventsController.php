@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace App\Controller;
 
 use App\Model\Event;
@@ -18,54 +16,60 @@ class EventsController extends AbstractController
         parent::__construct();
     }
    
-    public function eventsAction($id):void
+    public function eventsAction($id)
     {
         if ($this->auth->getCurrentUser() === null || !$this->auth->isLoggedIn())
         {
             $this->redirect('');
         }
 
-        if($id)
+        if(!$id)
         {
-            
-        
-        $this->view->render('Events/Events', [
-            'events' => Event::getAll()
-          
+                $sports = Event::getAll();
+                $venue = Event::getAll();
+                $events = Event::getAll();
+                $this->view->render('Events/Events', [
+                    'events'  => $events,
+                    'venues' => $venue
         ]);
         }
         else 
         {
-            $sports = Event::getEventSport($id);
-            $this->view->render('Events/Events', [
-                'events'  => Event::getAll(),
-                'sports' => $sports,
-            ]);
+                 $this->redirect('');
         }
     }
 
     public function addAction()
     {
-        $this->redirect('admin/events',[
+        if ($this->auth->getCurrentUser() === null || !$this->auth->getCurrentUser()->isAdmin() || !$this->auth->isLoggedIn())
+
+        {
+            $this->redirect('');
+        }
+        $this->view->render('Admin/events',[
             'sports' => Sport::getAll(),
-            'venus' => Venue::getAll()
+            'venues' => Venue::getAll()
         ]);
     }
 
     public function addSubmitAction()
     {
-        $this->session->resetFormInput();
+        if ($this->auth->getCurrentUser() === null || !$this->auth->getCurrentUser()->isAdmin() || !$this->auth->isLoggedIn())
+        {
+            $this->redirect('');
+        }
 
+        $this->session->resetFormInput();
+        
         $validator = new EventValidator();
         $post = Input::validatePost();
+
         if($validator->validate($post))
         {
             $event = ucfirst($post['event']);
             $description = ucfirst($post['description']);
             $startDate = $post['start-date'];
-            $endDate = $post['end-date'];
             $startTime = $post['start-time'];
-            $endTime = $post['end-time'];
             $sportId = $post['sport'];
             $venueId = $post['venues'];
 
@@ -73,17 +77,19 @@ class EventsController extends AbstractController
                 'event' => $event,
                 'description' => $description,
                 'start_date' => $startDate,
-                'end_date' => $endDate,
                 'start_time' => $startTime,
-                'end_time' => $endTime 
+                'sport_id' => $sportId,
+                'venue_id' => $venueId
             ]);
-
+/*
             $event = Event::getOne('id', $eventId);
             Event::addSportToEvent($event->getId(), $sportId);
-            Event::addVenuetoEvent($event->getId(), $venueId);
-
+            Event::addVenueToEvent($event->getId(), $venueId);
+*/
             $this->redirect('admin/events');
-        } else {
+
+        } else
+        {
             $this->session->setFormData($validator->getData());
             $this->session->setFormErrors($validator->getErrors());
             $this->redirect('admin/events');

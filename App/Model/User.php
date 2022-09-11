@@ -16,5 +16,4 @@ class User extends AbstractModel
 
         return $user->getEmail() ? true : false;
     }
-
 }

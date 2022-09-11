@@ -50,3 +50,6 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+a.custom-link {
+  text-decoration: none !important;
+}

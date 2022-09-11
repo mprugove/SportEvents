@@ -42,6 +42,11 @@ class SportsController extends AbstractController
 
     public function addAction()
     {
+        if ($this->auth->getCurrentUser() === null || !$this->auth->getCurrentUser()->isAdmin() || !$this->auth->isLoggedIn())
+        
+        {
+            $this->redirect('');
+        }
         $this->redirect('admin/sports');
     }
 

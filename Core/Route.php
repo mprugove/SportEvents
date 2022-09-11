@@ -25,7 +25,7 @@ class Route
         $this->register('GET', 'admin/venues', 'Admin@venues');
         $this->register('GET', 'admin/list', 'Admin@getList');
 
-        $this->register('GET', 'Venues', 'Venues@venues');
+        $this->register('GET', 'admin/venues', 'Admin@venues');
         
         $this->register('GET', 'Events', 'Events@events');
         $this->register('POST', 'Events', 'Events@addSubmit');

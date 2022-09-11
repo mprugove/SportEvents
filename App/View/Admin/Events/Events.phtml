@@ -1,39 +1,50 @@
 <?php include INCLUDE_PATH .'/header.phtml'; ?>
+<!-- add event modal-->
+<div class="col-md-3 my-4">  
+        <button type="buton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEventModal">
+            Add new event
+        </button>
+    </div>
 
-<?php foreach ($data['events'] as $event): ?>
-
+    <?php foreach ($data['events'] as $event): ?>
     <hr> 
                 <table class="table table-hover">
                     <thead class="table-primary">
                         <th>Event</th>
                         <th>Description</th>
+                        <th>Sport</th>
+                        <th>Venue</th>
                         <th>Start Date</th>
                         <th>Start Time</th>
                         <th>Actions</th>
                     </thead>
-           
+
                     <tbody>
                         <tr>
-                            <td><?= $event->getEvent(); ?></td>
+                            <!-- link to every page, <a href= URL_ROOT/venue/$venue->getId-->
+                            <td> <a class="btn btn-outline-primary border-0" href="<?=URL_ROOT;?>admin/events/<?= $event->getId(); ?>"><?= $event->getEvent(); ?></a></td>
                             <td><?= $event->getDescription(); ?></td>
+                            <?php foreach($event->getEventSport($event->getId()) as $eventSport): ?>
+                            <td><?= $eventSport->getData()['sport']; ?></td>
+                            <?php endforeach; ?>
+                            <td> <?php foreach ($event->getEventVenue($event->getId()) as $venue): ?> 
+                                    <?=$venue->getVenue(); ?> 
+                                 <?php endforeach;?>  
+                            </td>
                             <td><?= $event->getStartDate(); ?></td>
                             <td><?= $event->getStartTime(); ?></td>
                             <td>
-                                <a class="btn btn-primary" href="/SportEvents/admin/events/edit/<?= $event->id; ?>">Edit</a>
+                                <a class="btn btn-primary my-1" href="<?=URL_ROOT;?>admin/events/edit/<?= $event->getId(); ?>">Edit</a>
                                 <form action="<?= URL_ROOT;?>Events/deleteSubmit/<?= $event->getId(); ?>" method="post">
-                                    <button class="btn btn-danger" name="deleteSubmit">Delete</button>
+                                    <button onclick="return confirm('Are you sure you want to delete this event?')" class="btn btn-danger" name="deleteSubmit" >Delete</button>
                                 </form>
                             </td>
                         </tr>
                     </tbody>
                 </table>
  <?php endforeach;?>
-    <div class="col-md-3">  
-        <button type="buton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEventModal">
-            Add new event
-        </button>
-    </div>
-    
+
+    <!-- modal -->
     <div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -48,35 +59,34 @@
                         <div class="form-group">
                             <!--event, description -->
                             <label for="event" class="required font-weight-bold"></label>
-                            <input type="event" id="event" class="form-control my-1 " name="event" placeholder="Event" required="required"
-                                value="<?= isset($_SESSION['form_data']['sport']) ? $_SESSION['form_data']['sport'] : ''; ?>">
-                            <small class="text-danger"><?= isset($_SESSION['form_errors']['sport']) ? $_SESSION['form_errors']['sport'] : ''; ?></small>
+                            <input type="event" id="event" class="form-control my-1 " name="event" placeholder="Event"
+                                value="<?= isset($_SESSION['form_data']['event']) ? $_SESSION['form_data']['event'] : ''; ?>">
+                            <small class="text-danger"><?= isset($_SESSION['form_errors']['event']) ? $_SESSION['form_errors']['event'] : ''; ?></small>
+                            <textarea class="form-control my-1 form-floating" id="description" name="description" placeholder="Description"
+                            
+                                value="<?= isset($_SESSION['form_data']['event']) ? $_SESSION['form_data']['event'] : ''; ?>"></textarea>
 
-                            <textarea class="form-control my-1 form-floating" id="description" name="description" placeholder="Description"></textarea>
                             <!-- date, time -->
                             <div class="row">
-                                <div class="col-md-6"> Event start date
-                                    <input type="date" class="form-control" name="start-date" id="start-date">
+                                <div class="col-md-6 my-1"> Event start date
+                                    <input type="date" class="form-control" name="start-date" id="start-date" value="<?= date('Y-m-d');?>">
                                 </div>
-                               <div class="col-md-6">Event end date
-                                  <input type="date" class="form-control" name="end-date" id="end-date">
-                                </div>       
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6"> Event starting
-                                    <input type="time" class="form-control" name="start-time" id="start-time" value="22:00">
-                                </div>
-                                <div class="col-md-6"> Event ending
-                                    <input type="time" class="form-control" name="end-time" id="end-time" value="23:00">
+                            
+                                <div class="col-md-6 my-1"> Event starting
+                                    <input type="time" class="form-control" name="start-time" id="start-time" value="<?= isset($_SESSION['form_data']['start_time']) ? $_SESSION['form_data']['start_time'] : '21:00'; ?>">
+                                    <small class="text-danger"><?= isset($_SESSION['form_errors']['start_time']) ? $_SESSION['form_errors']['start_time'] : ''; ?></small>
                                 </div>
                             </div>
                          <!-- sport, venue -->
-                         <select name="sport" id="sport" class="form-control">
+                        Sport
+                         <select name="sport" id="sport" class="form-control my1">
                             <?php foreach($data['sports'] as $sport): ?>
                                 <option value="<?= $sport->getId(); ?>"><?= $sport->getSport();?></option>
+                                
                                 <?php endforeach; ?>
                          </select> 
-                         <select name="venues" id="venues" class="form-control">
+                     Venue
+                         <select name="venues" id="venues" class="form-control my-1">
                             <?php foreach($data['venues'] as $venue): ?>
                                 <option value="<?= $venue->getId(); ?>"><?= $venue->getVenue();?></option>
                                 <?php endforeach; ?>
@@ -84,6 +94,8 @@
                         </div>
                 </div>
             </div>
+
+
             <div class="modal-footer">
                 <input class="btn btn-primary" type="submit" value="Add">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

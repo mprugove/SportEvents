@@ -4,6 +4,9 @@ declare(strict_types = 1);
 
 namespace App\Controller;
 
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
+
 use App\Model\Event;
 use App\Model\User;
 
